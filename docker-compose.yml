@@ -1,0 +1,25 @@
+version: '3'
+
+networks:
+  estudo_seguranca:
+    driver: bridge
+  
+services:
+  #########################
+  ####### KALI LINUX ######
+  #########################
+  kali:
+    build:
+      context: ./docker
+      dockerfile: kali/Dockerfile
+    image: estudo/kali
+    container_name: kali
+    hostname: kali
+    networks:
+      estudo_seguranca:
+        aliases:
+          - kali
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment: 
+      - DISPLAY=unix$DISPLAY
